@@ -1,0 +1,15 @@
+{
+    "name": "trie",
+    "version": "0.1.0",
+    "repo": "goodcleanfun/trie",
+    "description": "Double-array trie implementation for compactly storing large dictionaries, storing tails in a contiguous array of bytes",
+    "keywords": ["trie", "dictionary", "double-array", "string", "lookup", "search", "prefix", "suffix"],
+    "license": "MIT",
+    "dependencies": {
+        "goodcleanfun/vector": "*",
+        "goodcleanfun/file_utils": "*",
+        "goodcleanfun/utf8": "*",
+        "goodcleanfun/logging.h": "*"
+    },
+    "src": ["src/trie.h", "src/trie.c"]
+  }
