@@ -1,5 +1,4 @@
 #include "trie.h"
-#include <math.h>
 
 #include "logging/logging.h"
 
