@@ -2,8 +2,6 @@
 
 #include "logging/logging.h"
 
-#define DEFAULT_NODE_ARRAY_SIZE 32
-
 #define TRIE_INDEX_ERROR  0
 #define TRIE_MAX_INDEX 0x7fffffff
 
@@ -45,7 +43,7 @@ static trie_t *trie_new_empty(uint8_t *alphabet, size_t alphabet_size) {
     if (!trie)
         goto exit_no_malloc;
 
-    trie->nodes = trie_node_array_new_size(DEFAULT_NODE_ARRAY_SIZE);
+    trie->nodes = trie_node_array_new_size(alphabet_size);
     if (!trie->nodes)
         goto exit_trie_created;
 
