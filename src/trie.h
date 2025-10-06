@@ -4,8 +4,8 @@
 * (compressed) in a single contiguous character array, separated by NUL-bytes,
 * so given an index into that array, we can treat the array as a C string
 * starting at that index. It also makes serialization dead simple.
-* This trie implementation also has several *_from_index methods which allow 
-* for effective namespacing e.g. adding the keys "en|blvd" and "fr|blvd"
+* This trie implementation also has several *_from_node_id methods which allow
+* for effective namespacing e.g. adding the keys "en|abc" and "fr|abc"
 * and searching by language. For more information on double-array tries
 * generally, see: http://linux.thai.net/~thep/datrie/datrie.html
 ******************************************************************************/
@@ -98,17 +98,17 @@ uint32_t trie_get_node_id_for_key(trie_t *self, char *key);
 
 uint32_t trie_num_keys(trie_t *self);
 
-typedef struct trie_prefix_result {
+typedef struct trie_partial_result {
     uint32_t node_id;
     size_t tail_pos;
-} trie_prefix_result_t;
+} trie_partial_result_t;
 
-#define TRIE_ROOT_PREFIX_RESULT (trie_prefix_result_t) {TRIE_ROOT_NODE_ID, 0}
-#define TRIE_NULL_PREFIX_RESULT (trie_prefix_result_t) {TRIE_NULL_NODE_ID, 0}
+#define TRIE_ROOT_PREFIX_RESULT (trie_partial_result_t) {TRIE_ROOT_NODE_ID, 0}
+#define TRIE_NULL_PREFIX_RESULT (trie_partial_result_t) {TRIE_NULL_NODE_ID, 0}
 
-trie_prefix_result_t trie_get_prefix(trie_t *self, char *key);
-trie_prefix_result_t trie_get_prefix_len(trie_t *self, char *key, size_t len);
-trie_prefix_result_t trie_get_prefix_from_index(trie_t *self, char *key, size_t len, uint32_t start_index, size_t tail_pos);
+trie_partial_result_t trie_get_partial(trie_t *self, char *key);
+trie_partial_result_t trie_get_partial_len(trie_t *self, char *key, size_t len);
+trie_partial_result_t trie_get_partial_from_node_id(trie_t *self, char *key, size_t len, uint32_t start_index, size_t tail_pos);
 
 void trie_destroy(trie_t *self);
 

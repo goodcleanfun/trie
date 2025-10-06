@@ -676,7 +676,7 @@ inline bool trie_set(trie_t *trie, char *key, uint32_t data) {
      return trie_set_at_index(trie, node_id, data);
 }
 
-trie_prefix_result_t trie_get_prefix_from_index(trie_t *trie, char *key, size_t len, uint32_t start_index, size_t tail_pos) {
+trie_partial_result_t trie_get_partial_from_node_id(trie_t *trie, char *key, size_t len, uint32_t start_index, size_t tail_pos) {
     if (key == NULL) {
         return TRIE_NULL_PREFIX_RESULT;
     }
@@ -719,25 +719,25 @@ trie_prefix_result_t trie_get_prefix_from_index(trie_t *trie, char *key, size_t 
         size_t query_len = (*ptr && original_node_no_tail) ? len - i - 1 : len - i;
 
         if (data_node.tail != 0 && trie_compare_tail(trie, query_tail, query_len, data_node.tail + tail_pos)) {
-            return (trie_prefix_result_t){next_id, tail_pos + query_len};
+            return (trie_partial_result_t){next_id, tail_pos + query_len};
         } else {
             return TRIE_NULL_PREFIX_RESULT;
 
         }
     } else {
-        return (trie_prefix_result_t){next_id, 0};
+        return (trie_partial_result_t){next_id, 0};
     }
 
     return TRIE_NULL_PREFIX_RESULT;
 
 }
 
-trie_prefix_result_t trie_get_prefix_len(trie_t *trie, char *key, size_t len) {
-    return trie_get_prefix_from_index(trie, key, len, TRIE_ROOT_NODE_ID, 0);
+trie_partial_result_t trie_get_partial_len(trie_t *trie, char *key, size_t len) {
+    return trie_get_partial_from_node_id(trie, key, len, TRIE_ROOT_NODE_ID, 0);
 }
 
-trie_prefix_result_t trie_get_prefix(trie_t *trie, char *key) {
-    return trie_get_prefix_from_index(trie, key, strlen(key), TRIE_ROOT_NODE_ID, 0);
+trie_partial_result_t trie_get_partial(trie_t *trie, char *key) {
+    return trie_get_partial_from_node_id(trie, key, strlen(key), TRIE_ROOT_NODE_ID, 0);
 }
 
 uint32_t trie_get_node_id_for_key_from_node_id(trie_t *trie, char *key, size_t len, uint32_t i) {
