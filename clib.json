@@ -11,9 +11,6 @@
     "dependencies": {
         "goodcleanfun/array": "*",
         "goodcleanfun/char_array": "*",
-        "goodcleanfun/file_utils": "*",
-        "goodcleanfun/index_array": "*",
-        "goodcleanfun/utf8": "*",
         "goodcleanfun/logging": "*"
     },
     "src": ["src/trie.h", "src/trie.c"]
