@@ -5,11 +5,16 @@
     "description": "Double-array trie implementation for compactly storing large dictionaries, storing tails in a contiguous array of bytes",
     "keywords": ["trie", "dictionary", "double-array", "string", "lookup", "search", "prefix", "suffix"],
     "license": "MIT",
+    "development": {
+        "silentbicycle/greatest": "*"
+    },
     "dependencies": {
-        "goodcleanfun/vector": "*",
+        "goodcleanfun/array": "*",
+        "goodcleanfun/char_array": "*",
         "goodcleanfun/file_utils": "*",
+        "goodcleanfun/index_array": "*",
         "goodcleanfun/utf8": "*",
-        "goodcleanfun/logging.h": "*"
+        "goodcleanfun/logging": "*"
     },
     "src": ["src/trie.h", "src/trie.c"]
   }
