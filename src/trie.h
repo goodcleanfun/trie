@@ -83,18 +83,18 @@ trie_node_t trie_get_free_list(trie_t *self);
 trie_data_node_t trie_get_data_node(trie_t *self, trie_node_t node);
 bool trie_set_data_node(trie_t *self, uint32_t index, trie_data_node_t data_node);
 
-bool trie_get_data_at_index(trie_t *self, uint32_t index,  uint32_t *data);
-bool trie_get_data(trie_t *self, char *key, uint32_t *data);
-bool trie_set_data_at_index(trie_t *self, uint32_t index, uint32_t data);
-bool trie_set_data(trie_t *self, char *key, uint32_t data);
+bool trie_get_at_index(trie_t *self, uint32_t index,  uint32_t *data);
+bool trie_get(trie_t *self, char *key, uint32_t *data);
+bool trie_set_at_index(trie_t *self, uint32_t index, uint32_t data);
+bool trie_set(trie_t *self, char *key, uint32_t data);
 
 bool trie_add_at_index(trie_t *self, uint32_t node_id, char *key, size_t len, uint32_t data);
 bool trie_add(trie_t *self, char *key, uint32_t data);
 bool trie_add_len(trie_t *self, char *key, size_t len, uint32_t data);
 
-uint32_t trie_get_from_index(trie_t *self, char *word, size_t len, uint32_t i);
-uint32_t trie_get_len(trie_t *self, char *word, size_t len);
-uint32_t trie_get(trie_t *self, char *word);
+uint32_t trie_get_node_id_for_key_from_node_id(trie_t *self, char *key, size_t len, uint32_t i);
+uint32_t trie_get_node_id_for_key_len(trie_t *self, char *key, size_t len);
+uint32_t trie_get_node_id_for_key(trie_t *self, char *key);
 
 uint32_t trie_num_keys(trie_t *self);
 

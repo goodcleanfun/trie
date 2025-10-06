@@ -8,33 +8,33 @@ TEST test_trie(void) {
     uint32_t data;
 
     ASSERT(trie_add(trie, "foo", 1));
-    ASSERT(trie_get_data(trie, "foo", &data));
+    ASSERT(trie_get(trie, "foo", &data));
     ASSERT_EQ(data, 1);
     ASSERT(trie_add(trie, "bar", 2));
-    ASSERT(trie_get_data(trie, "bar", &data));
+    ASSERT(trie_get(trie, "bar", &data));
     ASSERT_EQ(data, 2);
     ASSERT(trie_add(trie, "baz", 3));
-    ASSERT(trie_get_data(trie, "bar", &data));
+    ASSERT(trie_get(trie, "bar", &data));
     ASSERT_EQ(data, 2);
-    ASSERT(trie_get_data(trie, "baz", &data));
+    ASSERT(trie_get(trie, "baz", &data));
     ASSERT_EQ(data, 3);
     ASSERT(trie_add(trie, "barbaz", 4));
 
-    ASSERT(trie_get_data(trie, "bar", &data));
+    ASSERT(trie_get(trie, "bar", &data));
     ASSERT_EQ(data, 2);
-    ASSERT(trie_get_data(trie, "baz", &data));
+    ASSERT(trie_get(trie, "baz", &data));
     ASSERT_EQ(data, 3);
-    ASSERT(trie_get_data(trie, "barbaz", &data));
+    ASSERT(trie_get(trie, "barbaz", &data));
     ASSERT_EQ(data, 4);
     ASSERT_EQ(trie_num_keys(trie), 4);
 
-    ASSERT(trie_get_data(trie, "foo", &data));
+    ASSERT(trie_get(trie, "foo", &data));
     ASSERT_EQ(data, 1);
-    ASSERT(trie_get_data(trie, "bar", &data));
+    ASSERT(trie_get(trie, "bar", &data));
     ASSERT_EQ(data, 2);
-    ASSERT(trie_get_data(trie, "baz", &data));
+    ASSERT(trie_get(trie, "baz", &data));
     ASSERT_EQ(data, 3);
-    //ASSERT(trie_get_data(trie, "barz", &data));
+    //ASSERT(trie_get(trie, "barz", &data));
     //ASSERT_EQ(data, 4);
 
     trie_destroy(trie);

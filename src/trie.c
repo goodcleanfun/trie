@@ -642,7 +642,7 @@ inline bool trie_set_data_node(trie_t *trie, uint32_t index, trie_data_node_t da
     return true;
 }
 
-inline bool trie_get_data_at_index(trie_t *trie, uint32_t index,  uint32_t *data) {
+inline bool trie_get_at_index(trie_t *trie, uint32_t index,  uint32_t *data) {
      if (index == TRIE_NULL_NODE_ID) return false;
 
      trie_node_t node = trie_get_node(trie, index);
@@ -650,15 +650,15 @@ inline bool trie_get_data_at_index(trie_t *trie, uint32_t index,  uint32_t *data
      if (data_node.tail == 0) return false;
      *data = data_node.data;
 
-     return true;    
+     return true;
 }
 
-inline bool trie_get_data(trie_t *trie, char *key, uint32_t *data) {
-     uint32_t node_id = trie_get(trie, key);
-     return trie_get_data_at_index(trie, node_id, data);
+inline bool trie_get(trie_t *trie, char *key, uint32_t *data) {
+     uint32_t node_id = trie_get_node_id_for_key(trie, key);
+     return trie_get_at_index(trie, node_id, data);
 }
 
-inline bool trie_set_data_at_index(trie_t *trie, uint32_t index, uint32_t data) {
+inline bool trie_set_at_index(trie_t *trie, uint32_t index, uint32_t data) {
     if (index == TRIE_NULL_NODE_ID) return false;
      trie_node_t node = trie_get_node(trie, index);
      trie_data_node_t data_node = trie_get_data_node(trie, node);
@@ -667,13 +667,13 @@ inline bool trie_set_data_at_index(trie_t *trie, uint32_t index, uint32_t data) 
 
 }
 
-inline bool trie_set_data(trie_t *trie, char *key, uint32_t data) {
-     uint32_t node_id = trie_get(trie, key);
+inline bool trie_set(trie_t *trie, char *key, uint32_t data) {
+     uint32_t node_id = trie_get_node_id_for_key(trie, key);
      if (node_id == TRIE_NULL_NODE_ID) {
         return trie_add(trie, key, data);
      }
 
-     return trie_set_data_at_index(trie, node_id, data);
+     return trie_set_at_index(trie, node_id, data);
 }
 
 trie_prefix_result_t trie_get_prefix_from_index(trie_t *trie, char *key, size_t len, uint32_t start_index, size_t tail_pos) {
@@ -740,7 +740,7 @@ trie_prefix_result_t trie_get_prefix(trie_t *trie, char *key) {
     return trie_get_prefix_from_index(trie, key, strlen(key), TRIE_ROOT_NODE_ID, 0);
 }
 
-uint32_t trie_get_from_index(trie_t *trie, char *key, size_t len, uint32_t i) {
+uint32_t trie_get_node_id_for_key_from_node_id(trie_t *trie, char *key, size_t len, uint32_t i) {
     if (key == NULL) return TRIE_NULL_NODE_ID;
 
     uint8_t *ptr = (uint8_t *)key;
@@ -782,13 +782,13 @@ uint32_t trie_get_from_index(trie_t *trie, char *key, size_t len, uint32_t i) {
 
 }
 
-uint32_t trie_get_len(trie_t *trie, char *word, size_t len) {
-    return trie_get_from_index(trie, word, len, TRIE_ROOT_NODE_ID);
+uint32_t trie_get_node_id_for_key_len(trie_t *trie, char *word, size_t len) {
+    return trie_get_node_id_for_key_from_node_id(trie, word, len, TRIE_ROOT_NODE_ID);
 }
 
-uint32_t trie_get(trie_t *trie, char *word) {
+uint32_t trie_get_node_id_for_key(trie_t *trie, char *word) {
     size_t word_len = strlen(word);
-    return trie_get_from_index(trie, word, word_len, TRIE_ROOT_NODE_ID);
+    return trie_get_node_id_for_key_from_node_id(trie, word, word_len, TRIE_ROOT_NODE_ID);
 }
 
 
