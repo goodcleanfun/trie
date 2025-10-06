@@ -1,6 +1,6 @@
 {
     "name": "trie",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "repo": "goodcleanfun/trie",
     "description": "Double-array trie implementation for compactly storing large dictionaries, storing tails in a contiguous array of bytes",
     "keywords": ["trie", "dictionary", "double-array", "string", "lookup", "search", "prefix", "suffix"],
