@@ -2,7 +2,6 @@
 
 #include "logging/logging.h"
 
-#define TRIE_SIGNATURE 0xABABABAB
 #define DEFAULT_NODE_ARRAY_SIZE 32
 
 #define TRIE_INDEX_ERROR  0
